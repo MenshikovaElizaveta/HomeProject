@@ -2,12 +2,15 @@
 #include <string.h>
 
 int main(){
-    int set[]={918, 3, 7, 10, 99};
-    int arr[sizeof(set)]={0};
-    int k, b;
+    int set[]={1, 3, 7, 10, 99};
+    int k=0, b=0;
     for (int i = 0; i<sizeof(set); ++i){
         int a=set[i];
         int A= (a%10)+((a/10)%10)+((a/100)%10)+((a/1000)%10);
-        arr[i]=A;
-        
+        if (k>A){
+            k=A;
+            b=a;
+        }
+    }
+   printf("%d %d\n", k, b);
 }
