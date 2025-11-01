@@ -8,3 +8,5 @@ def queens_minimal(n):
                 t += f(r + 1, p)
         return t
     return f(0, [0]*n)
+n=int(input())
+print(queens_minimal(n))
