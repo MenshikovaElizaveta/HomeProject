@@ -3,41 +3,40 @@
 #include <stdbool.h>
 
 
-int countstr(char S[], char S1[]) {
-    int k = 0;
-    int lenS = strlen(S);
-    int lenS1 = strlen(S1);
+int countstr(const char* S, const char* S1, int lenS, int lenS1) {
+    int count = 0;
+    const char* tempS = S;
+    const char* tempS1 = S1;
 
     if (lenS1 ==0 || lenS < lenS1){
         return 0;
     }
-
-    for(int i = 0; i < lenS - lenS1 + 1; i++){
-        bool contin = true;
-        for( int j = 0; j < lenS1; j++){
-            if (S[i + j] != S1[j]){
-                contin = false;
-                break;
-            }
-        }
-        if (contin){
-            k++;
-        }
+    
+    while ((tempS = strstr(tempS, tempS1)) != NULL){
+        count++;
+        tempS++;
     }
 
-    return k;
+    return count;
 }
 
 int main(void) {
     char S[100], S1[100];
-    
+    int lenS, lenS1;
+
     printf("Введите строку S: ");
     fgets(S, sizeof(S), stdin);
+
     S[strcspn(S, "\n")] = '\0';
+    lenS = strlen(S);
+
     printf("Введите строку S1: ");
     fgets(S1, sizeof(S1), stdin);
+
     S1[strcspn(S1, "\n")] = '\0';
-    printf("содержится %d вхождений подстроки", countstr(S, S1));
+    lenS1 = strlen(S1);
+
+    printf("содержится %d вхождений подстроки", countstr(S, S1, lenS, lenS1));
 
   return 0;
 }
