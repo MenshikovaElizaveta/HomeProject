@@ -1,33 +1,57 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(){
-    char str[1000], stack[1000];
+int isLeftBracket(char c){
+    return c == '(' || c == '[' || c == '{';
+}
+
+int isRightBracket(char c){
+    return c == ')' || c == ']' || c == '}';
+}
+
+int Pair(char open, char c){
+    return ((c == ')' && open == '(') || (c == ']' && open == '[') || (c == '}' && open == '{'));
+}
+
+int balance(char* str, int len){
+    char stack[1000];
     int top = -1;
-    printf("Enter the line: ");
-    fgets(str, sizeof(str), stdin);
-    for (int i = 0; i < strlen(str); i++) {
-        char c = str[i];
-        if (c == '(' || c == '[' || c == '{') {
-            stack[++top] = c;
-        }
-        else if (c == ')' || c == ']' || c == '}') {
+
+    for (int i = 0; i < len; i++) {
+        if (isLeftBracket(str[i])) {
+            stack[++top] = str[i];
+        } 
+        
+        else if (isRightBracket(str[i])) {
             if (top == -1) { 
-                printf("the balance of the brackets is broken\n");
                 return 0;
             }
             char open = stack[top--];
-            if ((c == ')' && open != '(') ||
-                (c == ']' && open != '[') ||
-                (c == '}' && open != '{')) {
-                printf("the balance of the brackets is broken\n");
+            if (!Pair(open, str[i])){
                 return 0;
             }
         }
     }
-    if (top == -1)
+
+    return (top == -1);
+}
+
+
+int main(){
+    char str[1000];
+    int len;
+
+    printf("Enter the line: ");
+    fgets(str, sizeof(str), stdin);
+    len = strlen(str);
+
+    if (balance(str, len)){
         printf("the balance of the brackets is respected\n");
-    else
+    }
+
+    else{
         printf("the balance of the brackets is broken\n");
+    }
+
     return 0;
 }
