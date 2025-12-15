@@ -24,7 +24,7 @@ int isOperator(char ch) {
     return ch == '+' || ch == '-' || ch == '*' || ch == '/';
 }
 
-void infixToPostfix(char* infix, char* postfix) {
+int infixToPostfix(char* infix, char* postfix) {
     int i = 0;
     int j = 0;
     Stack opStack;
@@ -44,6 +44,11 @@ void infixToPostfix(char* infix, char* postfix) {
                 postfix[j++] = pop(&opStack);
                 postfix[j++] = ' ';
             }
+            if (isEmpty(&opStack) || peek(&opStack) != '(') {
+                printf("Incorrect input.\n");
+                postfix[0] = '\0';
+                return -1;
+            }
             pop(&opStack);
             i++;
         } else if (isOperator(infix[i])) {
@@ -52,6 +57,7 @@ void infixToPostfix(char* infix, char* postfix) {
                    precedence(infix[i]) <= precedence(peek(&opStack))) {
                 postfix[j++] = pop(&opStack);
                 postfix[j++] = ' ';
+                }
             }
             push(&opStack, infix[i]);
             i++;
@@ -60,11 +66,16 @@ void infixToPostfix(char* infix, char* postfix) {
         } else {
             printf("Invalid character: %c\n", infix[i]);
             postfix[0] = '\0';
-            return;
+            return -1;
         }
     }
 
     while (!isEmpty(&opStack)) {
+        if (peek(&opStack) == '(') {
+            printf("Incorrect input.\n");
+            postfix[0] = '\0';
+            return -1;
+        }
         postfix[j++] = pop(&opStack);
         postfix[j++] = ' ';
     }
@@ -73,4 +84,6 @@ void infixToPostfix(char* infix, char* postfix) {
         j--;
     }
     postfix[j] = '\0';
+
+    return 0;
 }
