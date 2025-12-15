@@ -23,7 +23,7 @@ int main(void){
     for(int i = 0; i < size; i++){
         scanf("%d", &arr[i]);
     }
-    printf("массив содержит %dNumber_of_zeros нулевых элементов", countZeroElements(arr, size));
+    printf("массив содержит %d нулевых элементов", countZeroElements(arr, size));
     
     return 0;
 }
