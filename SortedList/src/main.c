@@ -1,0 +1,54 @@
+#include "list.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main(void) {
+    Node* head = NULL;
+    int opcode, val;
+
+    printf("Введите одну из следующих операций:\n");
+    printf("0 - выйти\n");
+    printf("1 - добавить значение в сортированный список\n");
+    printf("2 - удалить значение из списка\n");
+    printf("3 - распечатать список\n");
+
+    do {
+        scanf("%d", &opcode);
+        while (getchar() != '\n');
+        switch (opcode) {
+        case 0:
+            break;
+        case 1:
+            printf("Добавьте число в список: ");
+            scanf("%d", &val);
+            while (getchar() != '\n');
+            put(&head, val);
+            break;
+        case 2:
+            printf("Удалите число из списка: ");
+            scanf("%d", &val);
+            while (getchar() != '\n');
+            pop(&head, val);
+            break;
+        case 3:
+            printlist(head);
+            break;
+        default:
+            printf("Такой команды нет.\n");
+            break;
+        }
+        printf("Введите следующую команду: ");
+    } while (opcode != 0);
+
+    Node* cur = head;
+    Node* nextNode;
+    while (cur != NULL) {
+        nextNode = cur->next;
+        free(cur);
+        cur = nextNode;
+    }
+    head = NULL;
+
+    return 0;
+}
