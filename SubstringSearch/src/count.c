@@ -1,4 +1,4 @@
-#include <count.h>
+#include "count.h"
 
 int countstr(const char* S, const char* S1, int lenS, int lenS1) {
     int count = 0;
