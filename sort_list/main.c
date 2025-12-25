@@ -1,16 +1,9 @@
 #include "list.h"
+#include "tests/test_list.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-
-
-bool test_put(void);
-bool test_pop(void);
-bool test_empty(void);
-bool test_double(void);
-bool run_tests(void);
-
 
 int main(int argc, char* argv[]) {
     if (argc == 2 && strcmp(argv[1], "--test") == 0) {
