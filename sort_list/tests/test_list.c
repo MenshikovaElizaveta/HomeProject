@@ -1,113 +1,100 @@
-#include "../list.h"
 #include "test_list.h"
-#include <stdlib.h>
+#include "../list.h"
 #include <stdbool.h>
-
+#include <stdlib.h>
 
 bool test_put() {
-    Node* head = NULL;
+  Node *head = NULL;
 
-    put(&head, 30);
-    put(&head, 10);
-    put(&head, 20);
+  put(&head, 30);
+  put(&head, 10);
+  put(&head, 20);
 
-    bool result = (head != NULL) &&
-                  (head->num == 10) &&
-                  (head->next->num == 20) &&
-                  (head->next->next->num == 30) &&
-                  (head->next->next->next == NULL);
+  bool result = (head != NULL) && (head->num == 10) &&
+                (head->next->num == 20) && (head->next->next->num == 30) &&
+                (head->next->next->next == NULL);
 
-    freeList(&head);
-    return result;
+  freeList(&head);
+  return result;
 }
-
 
 bool test_pop() {
-    Node* head = NULL;
+  Node *head = NULL;
 
-    put(&head, 10);
-    put(&head, 5);
-    put(&head, 15);
-    pop(&head, 10);
+  put(&head, 10);
+  put(&head, 5);
+  put(&head, 15);
+  pop(&head, 10);
 
-    bool result1 = (head->num == 5) &&
-                   (head->next->num == 15) &&
-                   (head->next->next == NULL);
+  bool result1 =
+      (head->num == 5) && (head->next->num == 15) && (head->next->next == NULL);
 
-    pop(&head, 5);
+  pop(&head, 5);
 
-    bool result2 = (head->num == 15) &&
-                   (head->next == NULL);
+  bool result2 = (head->num == 15) && (head->next == NULL);
 
-    pop(&head, 15);
+  pop(&head, 15);
 
-    bool result3 = (head == NULL);
-    
-    freeList(&head);
+  bool result3 = (head == NULL);
 
-    return (result1 && result2 && result3);
+  freeList(&head);
+
+  return (result1 && result2 && result3);
 }
-
 
 bool test_empty() {
-    Node* head = NULL;
+  Node *head = NULL;
 
-    pop(&head, 999);
-    
-    bool result1 = (head == NULL);
+  pop(&head, 999);
 
-    put(&head, 42);
+  bool result1 = (head == NULL);
 
-    bool result2 = (head->num == 42) && 
-                   (head->next == NULL);
+  put(&head, 42);
 
-    pop(&head, 42);
+  bool result2 = (head->num == 42) && (head->next == NULL);
 
-    bool result3 = (head == NULL);
-    
-    pop(&head, 42);
+  pop(&head, 42);
 
-    bool result4 = (head == NULL);
+  bool result3 = (head == NULL);
 
-    freeList(&head);
+  pop(&head, 42);
 
-    return (result1 && result2 && result3 && result4);
+  bool result4 = (head == NULL);
+
+  freeList(&head);
+
+  return (result1 && result2 && result3 && result4);
 }
-
 
 bool test_double() {
-    Node* head = NULL;
+  Node *head = NULL;
 
-    put(&head, 5);
-    put(&head, 5);
-    put(&head, 5);
+  put(&head, 5);
+  put(&head, 5);
+  put(&head, 5);
 
-    bool result1 = (head->num == 5) &&
-                   (head->next->num == 5) &&
-                   (head->next->next->num == 5) &&
-                   (head->next->next->next == NULL);
+  bool result1 = (head->num == 5) && (head->next->num == 5) &&
+                 (head->next->next->num == 5) &&
+                 (head->next->next->next == NULL);
 
-    pop(&head, 5);
+  pop(&head, 5);
 
-    bool result2 = (head->num == 5) &&
-                   (head->next->num == 5) &&
-                   (head->next->next == NULL);
+  bool result2 =
+      (head->num == 5) && (head->next->num == 5) && (head->next->next == NULL);
 
-    pop(&head, 5);
+  pop(&head, 5);
 
-    bool result3 = (head->num == 5) &&
-                   (head->next == NULL);
-    
-    pop(&head, 5);
+  bool result3 = (head->num == 5) && (head->next == NULL);
 
-    bool result4 = (head == NULL);
+  pop(&head, 5);
 
-    freeList(&head);
+  bool result4 = (head == NULL);
 
-    return (result1 && result2 && result3 && result4);
+  freeList(&head);
+
+  return (result1 && result2 && result3 && result4);
 }
 
-
 bool run_tests(void) {
-    return test_put() && test_pop() && test_empty() && test_double();
+  return test_put() && test_pop() && test_empty() && test_double();
 }
