@@ -1,5 +1,5 @@
 #include "../list.h"
-#include <assert.h>
+#include "test_list.h"
 #include <stdlib.h>
 #include <stdbool.h>
 
