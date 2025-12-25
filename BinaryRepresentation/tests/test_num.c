@@ -1,4 +1,5 @@
-#include "../numsys.h"
+#include "test_num.h"
+#include "numsys.h"
 #include <stdbool.h>
 
 bool test_simple()
